@@ -1,2 +1,5 @@
 data/
 papers/
+*.txt
+*.csv
+
