@@ -155,13 +155,13 @@ class Constants:
     EVENT_PERIOD = 180 * 60 * 1000  # 2 hrs in ms
 
     PARAMS = {
-        "trials": 21,
-        "merging_thr": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3,  0.2, 0.15, 0.25, 0.1, 0.35, 0.4, 0.45,  0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
-        "merging_iter": [1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1],
-        "min_tweets": [9, 9, 9, 9, 9, 9, 9,  9, 9, 9, 9, 9, 9, 9,  9, 9, 9, 9, 9, 9, 9],
-        "min_gradient": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,  0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,  0.1, 0.2, 0.3, 0.4, 0.6, 1.0, 2.0],
-        "entropy_thr": [1, 2, 3, 4, 5, 6, 7,  1, 2, 3, 4, 5, 6, 7,  1, 2, 3, 4, 5, 6, 7],
-        "named_entities": [11, 11, 11, 11, 11, 11, 11,  11, 11, 11, 11, 11, 11, 11,  11, 11, 11, 11, 11, 11, 11]
+        "trials": 1,
+        "merging_thr": [1.0],
+        "merging_iter": [1],
+        "min_tweets": [9],
+        "min_gradient": [0.0],
+        "entropy_thr": [0],
+        "named_entities": [11]
     }
 
 
@@ -260,8 +260,12 @@ if __name__ == "__main__":
 
         clusters = copy.deepcopy(init_clusters)
 
+        print "Number of init clusters", len(init_clusters)
+
         if not (min_tweets == 0 and named_ent_thr == 0):
             clusters = do_cluster_filtering_tweets_and_named_entities(clusters, min_tweets, named_ent_thr)
+
+        print "Number of clust after", len(clusters)
 
         if merging_thr != -1:
             clusters = do_cluster_merging(clusters, merging_iter, merging_thr, helper)
